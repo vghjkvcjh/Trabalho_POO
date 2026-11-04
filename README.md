@@ -43,6 +43,7 @@ Cada item abaixo deve aparecer **pelo menos uma vez** no código e o grupo deve 
 
 Estrutura sugerida (pode ser adaptada):
 
+```
 trabalho-poo/
 ├── README.md
 ├── docs/
@@ -56,6 +57,7 @@ trabalho-poo/
 │       ├── __init__.py
 │       ├── pessoa.py
 │       └── ...
+```
 
 - Usar **type hints** e **docstrings** nas classes e métodos públicos (padrão das aulas).
 - Nomes de classes em `PascalCase`.
