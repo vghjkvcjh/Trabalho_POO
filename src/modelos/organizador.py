@@ -3,9 +3,13 @@ from modelos.evento import Evento
 from datetime import datetime
 
 class Organizador(Pessoa):
-    def __init__ (self, nome: str, cpf: str,):
-        super().__init__(nome, cpf)
+    cargo = 1
+    todos = []
+
+    def __init__ (self, nome: str, cpf: str, idade: int):
+        super().__init__(nome, cpf, idade)
         self.eventos = []
+        Organizador.todos.append(self)
     
     def CriarEvento (self, nome: str, data: datetime, local: str, valor: float) -> Evento:
         if not nome:
@@ -28,3 +32,18 @@ class Organizador(Pessoa):
             evento.local = local
         if valor is not None:
             evento.valor = valor
+
+    def __str__ (self) -> str:
+        base = super().__str__()
+        return f"{base} | Eventos: {len(self.eventos)}"
+
+    @classmethod
+    def ListarTodos(cls) -> None:
+        if not cls.todos:
+            print("Nenhum organizador cadastrado.")
+            return
+
+        for org in cls.todos:
+            print(org)
+            for evento in org.eventos:
+                print(f"    -> {evento}")
