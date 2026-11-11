@@ -1,6 +1,7 @@
 # importa bibliotecas, uma para criar o id como autoincrement e a outra para codificar senhas
 import itertools
 import hashlib
+from abc import ABC, abstractmethod
 
 class Pessoa:
     id_obj = itertools.count(1)
@@ -9,6 +10,7 @@ class Pessoa:
     # lista contendo todas as contas criadas
     contas = {}
 
+    @abstractmethod
     def __init__ (self, nome: str, cpf: str, idade: int):
         self.id_user = next(Pessoa.id_obj)
         self.nome = nome
