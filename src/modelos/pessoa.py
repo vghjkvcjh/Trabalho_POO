@@ -4,7 +4,7 @@ import hashlib
 from abc import ABC, abstractmethod
 
 class Pessoa:
-    id_obj = itertools.count(1)
+    id_user = itertools.count(1)
     # a variável cargo será usada posteriormente como redundância para evitar que clientes acessem informações indevidas 
     cargo = 0
     # lista contendo todas as contas criadas
@@ -12,7 +12,7 @@ class Pessoa:
 
     @abstractmethod
     def __init__ (self, nome: str, cpf: str, idade: int):
-        self.id_user = next(Pessoa.id_obj)
+        self.id_user = next(Pessoa.id_user)
         self.nome = nome
         self.cpf = cpf
         self.idade = idade
@@ -48,8 +48,8 @@ class Pessoa:
         return pessoa
 
     # serve para autentificar uma tentativa de login
-    def Autenticar (cpf: str, senha: str) -> bool:
-        return self.email == email and self.senhaH == self.gerarHash(senha)
+    def Autenticar (self, cpf: str, senha: str) -> bool:
+        return self.cpf == cpf and self.senhaH == self.gerarHash(senha)
     
     # Função utilizada para codificar as senhas
     @staticmethod
