@@ -11,16 +11,16 @@ class Organizador(Pessoa):
         self.eventos = []
         Organizador.todos.append(self) # adiciona o organizador à lista assim que ele é criado
     
-    def CriarEvento (self, nome: str, data: datetime, local: str, valor: float) -> Evento:
+    def CriarEvento (self, nome: str, data: datetime, local: str, idade_minima, valor: float) -> Evento:
         if not nome:
             raise ValueError("O nome não pode ser vazio")
         
-        evento = Evento (nome=nome, data=data, local=local, organizador=self, valor=valor) # cria uma lista particular que contém todos os eventos criados por um organizador
+        evento = Evento (nome=nome, data=data, local=local, idade_minima=idade_minima, organizador=self, valor=valor) # cria uma lista particular que contém todos os eventos criados por um organizador
 
         self.eventos.append(evento) # adiciona o evento recém criado à lista pessoal de eventos criados
         return evento
 
-    def EditarEvento (self, evento:Evento, nome: str = None, data: datetime = None, local: str = None, valor: float = None) -> Evento:
+    def EditarEvento (self, evento:Evento, nome: str = None, data: datetime = None, local: str = None, idade_minima = None, valor: float = None) -> Evento:
         if evento not in self.eventos:
             raise ValueError("Este evento não te pertence")
 
@@ -30,6 +30,8 @@ class Organizador(Pessoa):
             evento.data = data
         if local is not None:
             evento.local = local
+        if idade_minima is not None:
+            evento.idade_minima = idade_minima
         if valor is not None:
             evento.valor = valor
 
