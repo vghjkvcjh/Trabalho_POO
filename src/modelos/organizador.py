@@ -1,5 +1,5 @@
-from modelos.pessoa import Pessoa
-from modelos.evento import Evento
+from .pessoa import Pessoa
+from .evento import Evento
 from datetime import datetime
 
 class Organizador(Pessoa):

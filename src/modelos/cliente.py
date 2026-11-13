@@ -1,5 +1,5 @@
-from modelos.pessoa import Pessoa
-from modelos.ingresso import Ingresso
+from .pessoa import Pessoa
+from .ingresso import Ingresso
 
 # base do cliente
 class Cliente(Pessoa):
