@@ -23,15 +23,7 @@ class Pessoa:
         return (f"ID: {self.id_user} | Nome: {self.nome} | CPF: {self.cpf} | Idade: {self.idade} | Cargo: {self.cargo}")
     
 
-    @classmethod
-    def Login(cls, cpf: str, senha: str):
-        pessoa = Pessoa.contas.get(cpf) # procura o objeto na lista
-
-        if pessoa is None or not pessoa.Autenticar(senha):
-            raise ValueError("CPF e/ou Senha incorretos")
-
-        return pessoa
+    
 
     # serve para autentificar uma tentativa de login
-    def Autenticar (self, cpf: str, senha: str) -> bool:
-        return self.cpf == cpf and self.senhaH == self.gerarHash(senha)
+    

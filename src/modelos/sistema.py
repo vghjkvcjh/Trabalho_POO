@@ -6,7 +6,7 @@ from .evento import Evento
 import hashlib
 
 
-class SistemaEventos:
+class Sistema:
     def __init__ (self) -> None:
         self._contas: dict[str, Pessoa] = {}
         self._eventos: dict[str, Evento] = {}
@@ -14,6 +14,9 @@ class SistemaEventos:
     @staticmethod
     def _gerarHash (senha: str) -> str:
         return hashlib.sha256(senha.encode()).hexdigest()
+
+    def Autenticar (self, cpf: str, senha: str) -> bool:
+        return self.cpf == cpf and self.senhaH == self.gerarHash(senha)
 
     def criarConta (self, tipo: type[Pessoa], nome: str, cpf: str, idade: int, senha: str) -> Pessoa:
         if not nome:
@@ -33,3 +36,11 @@ class SistemaEventos:
 
     def criarOrganizador (self, nome: str, cpf: str, idade: int, senha: str) -> Organizador:
         return self.criarConta(Organizador, nome, cpf, idade, senha)
+
+    def Login(self, cpf: str, senha: str):
+        pessoa = self._contas.get(cpf) # procura o objeto na lista
+
+        if pessoa is None or not pessoa.senhaH(senha) != self._gerarHash(senha):
+            raise ValueError("CPF e/ou Senha incorretos")
+
+        return pessoa
