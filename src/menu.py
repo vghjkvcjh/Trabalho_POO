@@ -3,9 +3,12 @@ from modelos.evento import Evento
 from modelos.organizador import Organizador
 from modelos.cliente import Cliente
 
-os.system('cls' if os.name == 'nt' else 'clear')
+def limpa():
+    os.system('cls' if os.name == 'nt' else 'clear')
 
 def menu_principal():
+    limpa()
+
     while True:
         print("Bem-vindo lorem ipsum!")
         print("-----------------------")
@@ -16,22 +19,22 @@ def menu_principal():
 
         try:
             opcao = int(input("Digite uma opção: "))
-
+            
+            if opcao not in [1, 2, 3]:
+                raise ValueError("Número de opção inválido!")
+            
             if opcao == 1:
-                os.system('cls' if os.name == 'nt' else 'clear')
+                limpa()
                 print("Entrando\n")
             elif opcao == 2:
-                os.system('cls' if os.name == 'nt' else 'clear')
+                limpa()
                 print("Criando\n")
             elif opcao == 3:
                 print("\nAdeus!\n")
                 break
 
-            if opcao not in [1, 2, 3]:
-                raise ValueError
-
-        except ValueError:
-            os.system('cls' if os.name == 'nt' else 'clear')
-            print("Digite uma opção válida.\n")
+        except ValueError as erro:
+            limpa()
+            print(f"Erro: {erro}\n")
 
 menu_principal()
