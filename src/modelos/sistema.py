@@ -3,6 +3,8 @@ from .cliente import Cliente
 from .organizador import Organizador
 from .ingresso import Ingresso
 from .evento import Evento
+import hashlib
+
 
 class SistemaEventos:
     def __init__ (self) -> None:

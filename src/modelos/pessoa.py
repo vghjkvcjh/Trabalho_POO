@@ -1,6 +1,5 @@
 # importa bibliotecas, uma para criar o id como autoincrement e a outra para codificar senhas
 import itertools
-import hashlib
 from abc import ABC, abstractmethod
 
 class Pessoa:
