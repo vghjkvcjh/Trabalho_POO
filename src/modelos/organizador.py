@@ -19,9 +19,10 @@ class Organizador(Pessoa):
         return evento
 
     def EditarEvento (self, evento:Evento, nome: str = None, data: datetime = None, local: str = None, idade_minima = None, valor: float = None, vagas: int = None):
-        if evento not in self.eventos:
+        if evento not in self.eventos: # tratamento de erro
             raise ValueError("Este evento não te pertence")
 
+        # mantem todas as variáveis que não foram modificadas
         if nome is not None:
             evento.nome = nome
         if data is not None:
@@ -39,14 +40,3 @@ class Organizador(Pessoa):
     def __str__ (self) -> str:
         base = super().__str__()
         return f"{base} | Eventos: {len(self.eventos)}"
-
-    @classmethod
-    def ListarTodos(cls) -> None:
-        if not cls.todos:
-            print("Nenhum organizador cadastrado.")
-            return
-
-        for org in cls.todos:
-            print(org)
-            for evento in org.eventos:
-                print(f"    -> {evento}")
