@@ -3,8 +3,6 @@ from .evento import Evento
 from datetime import datetime
 
 class Organizador(Pessoa):
-    cargo = 1
-    todos = [] # lista de todos os organizadores
 
     def __init__ (self, nome: str, cpf: str, idade: int):
         super().__init__(nome, cpf, idade)

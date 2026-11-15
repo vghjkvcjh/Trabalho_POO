@@ -3,7 +3,6 @@ from modelos.ingresso import Ingresso
 
 # Base do Cliente
 class Cliente(Pessoa):
-    cargo = 0
     def __init__ (self, nome: str, cpf: str, idade: int):
         super().__init__(nome, cpf, idade)
         self.ingressosP = [] # Lista de Ingressos que o Cliente possui
