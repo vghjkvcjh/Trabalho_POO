@@ -24,7 +24,7 @@ import sys
 # Permite rodar de qualquer pasta: coloca "src/" no caminho de importação.
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
-from menu import Menu
+from menu import menu_principal
 from modelos import Sistema
 
 # Cria o Sistema, Carrega os dados de exemplo e abre o menu interativo.
