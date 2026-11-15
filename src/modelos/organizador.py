@@ -7,7 +7,6 @@ class Organizador(Pessoa):
     def __init__ (self, nome: str, cpf: str, idade: int):
         super().__init__(nome, cpf, idade)
         self.eventos = []
-        Organizador.todos.append(self) # adiciona o organizador à lista assim que ele é criado
     
     def CriarEvento (self, nome: str, data: datetime, local: str, idade_minima, valor: float, vagas: int) -> Evento:
         if not nome:
