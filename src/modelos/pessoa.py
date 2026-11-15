@@ -4,10 +4,6 @@ from abc import ABC, abstractmethod
 
 class Pessoa(ABC):
     id_user = itertools.count(1)
-    # a variável cargo será usada posteriormente como redundância para evitar que clientes acessem informações indevidas 
-    cargo = 0
-    # lista contendo todas as contas criadas
-    contas = {}
 
     @abstractmethod
     def __init__ (self, nome: str, cpf: str, idade: int):
