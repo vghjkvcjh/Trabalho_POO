@@ -2,7 +2,7 @@
 import itertools
 from abc import ABC, abstractmethod
 
-class Pessoa:
+class Pessoa(ABC):
     id_user = itertools.count(1)
     # a variável cargo será usada posteriormente como redundância para evitar que clientes acessem informações indevidas 
     cargo = 0
@@ -11,7 +11,7 @@ class Pessoa:
 
     @abstractmethod
     def __init__ (self, nome: str, cpf: str, idade: int):
-        self.id_user = next(Pessoa.id_user)
+        self.id = next(Pessoa.id_user)
         self.nome = nome
         self.cpf = cpf
         self.idade = idade
@@ -20,10 +20,4 @@ class Pessoa:
 
     # função utilizada para listar as contas
     def __str__ (self) -> str:
-        return (f"ID: {self.id_user} | Nome: {self.nome} | CPF: {self.cpf} | Idade: {self.idade} | Cargo: {self.cargo}")
-    
-
-    
-
-    # serve para autentificar uma tentativa de login
-    
+        return (f"ID: {self.id} | Nome: {self.nome} | CPF: {self.cpf} | Idade: {self.idade} | Cargo: {self.cargo}")
