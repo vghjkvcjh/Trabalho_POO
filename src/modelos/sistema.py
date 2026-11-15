@@ -16,7 +16,12 @@ class Sistema:
         return hashlib.sha256(senha.encode()).hexdigest()
 
     def Autenticar (self, cpf: str, senha: str) -> bool: # compara os valores inseridos com o que o sistema possui
-        return self.cpf == cpf and self.senhaH == self.gerarHash(senha)
+        pessoa = self._contas.get(cpf)
+
+        if pessoa is None:
+            return False
+
+        return pessoa.senhaH == self._gerarHash(senha)
 
     def criarConta (self, tipo: type[Pessoa], nome: str, cpf: str, idade: int, senha: str) -> Pessoa: # base para a criação de conta. NÃO USAR
         if not nome: # tratamento de erros
@@ -38,12 +43,10 @@ class Sistema:
         return self.criarConta(Organizador, nome, cpf, idade, senha)
 
     def Login(self, cpf: str, senha: str):
-        pessoa = self._contas.get(cpf)
-
-        if pessoa is None or not pessoa.senhaH(senha) != self._gerarHash(senha): # compara o hash registrado ao inserido, mostrando erro se não forem iguais
-            raise ValueError("CPF e/ou Senha incorretos")
-
-        return pessoa
+        if not self.Autenticar(cpf, senha):
+            raise ValueError("CPF e/ou senha incorretos")
+        
+        return self._contas[cpf]
 
     def ListarOrganizadores(self) -> None:
         organizadores = [o for o in self._contas.values() if isinstance(o, Organizador)] # percorre todas as contas selecionando apenas aqueles com tipo Organizador
