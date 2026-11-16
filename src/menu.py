@@ -6,7 +6,7 @@ def limpa():
     os.system('cls' if os.name == 'nt' else 'clear')
 
 # Função do menu principal
-def menu_principal():
+def menu_principal() -> None:
     limpa()
     sistema = Sistema()
 
@@ -64,13 +64,54 @@ def menu_criarConta(sistema):
 
             if opcao == 1:
                 limpa()
-                menu_criarCliente()
+                menu_criarCliente(sistema)
             elif opcao == 2:
                 limpa()
                 
             elif opcao == 3:
                 limpa()
                 return  # Retorna ao menu principal
+
+        except ValueError as erro:
+            limpa()
+            print(f"Erro: {erro}\n")
+
+
+def menu_criarCliente(sistema):
+    limpa()
+
+    while True:
+        print("=======================")
+        print("Criar Conta de Usuário")
+        print("-----------------------")
+        print("1. Criar conta")
+        print("2. Voltar ao menu anterior")
+        print("=======================")
+
+        try:
+            opcao = int(input("Digite uma opção: "))
+
+            if opcao not in [1, 2]:
+                raise ValueError("Número de opção inválido!")
+
+            if opcao == 1:
+                limpa()
+                
+                nome = input("Digite o nome: ")
+                cpf = input("Digite o CPF: ")
+                idade = int(input("Digite a idade: "))
+                senha = input("Digite a senha: ")
+                
+                sistema.criarCliente(nome, cpf, idade, senha)
+
+                limpa()
+
+                print("Conta de usuário criada com sucesso!\n")
+                return  # Retorna ao menu anterior
+                
+            elif opcao == 2:
+                limpa()
+                return  # Retorna ao menu anterior
 
         except ValueError as erro:
             limpa()
