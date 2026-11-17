@@ -11,7 +11,6 @@ class Pessoa(ABC):
         self.nome = nome
         self.cpf = cpf
         self.idade = idade
-        self.cargo = self.cargo
         self.senhaH = None
 
     # função utilizada para listar as contas
