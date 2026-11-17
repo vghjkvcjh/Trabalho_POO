@@ -1,17 +1,15 @@
 import os
 from modelos.sistema import Sistema
 
-# Função para limpar o terminal
-def limpa():
+def limpa(): # Função para limpar o terminal
     os.system('cls' if os.name == 'nt' else 'clear')
 
-# Função do menu principal
-def menu_principal() -> None:
+
+def menu_principal(): # Função do menu principal
     limpa()
     sistema = Sistema()
 
-    # Loop principal do menu
-    while True:
+    while True: # Loop principal do menu
         print("=======================")
         print("Bem-vindo lorem ipsum!")
         print("-----------------------")
@@ -20,25 +18,64 @@ def menu_principal() -> None:
         print("3. Sair")
         print("=======================")
 
-        # Loop para capturar a opção do usuário
-        try:
+        try: # Loop para capturar a opção do usuário
             opcao = int(input("Digite uma opção: "))
 
-            # Levanta uma exceção se a opção for inválida
-            if opcao not in [1, 2, 3]:
+            if opcao not in [1, 2, 3]: # Levanta uma exceção se a opção for inválida
                 raise ValueError("Número de opção inválido!")
             
-            if opcao == 1:
+            if opcao == 1: # Chama a função de login
                 limpa()
-                print("Entrando\n")
-            elif opcao == 2:
+                menu_login(sistema)
+                
+            elif opcao == 2: # Chama a função de criação de conta
                 menu_criarConta(sistema)
-            elif opcao == 3:
+            elif opcao == 3: # Sai do programa
                 limpa()
                 print("Adeus!\n")
                 break
 
-        # Tratamento de exceção para entrada inválida
+        except ValueError as erro: # Tratamento de exceção para entrada inválida
+            limpa()
+            print(f"Erro: {erro}\n") # Exibe a mensagem de erro
+
+
+def menu_login(sistema):
+    limpa()
+
+    while True:
+        print("=======================")
+        print("Login")
+        print("-----------------------")
+        print("1. Entrar")
+        print("2. Voltar ao menu principal")
+        print("=======================")
+
+        try:
+            opcao = int(input("Digite uma opção: "))
+
+            if opcao not in [1, 2]:
+                raise ValueError("Número de opção inválido!")
+
+            if opcao == 1:
+                limpa()
+                cpf = int(input("Digite o CPF: "))
+                senha = input("Digite a senha: ")
+
+                try:
+                    pessoa = sistema.Login(cpf, senha)
+                    limpa()
+                    print(f"Bem-vindo(a), {pessoa.nome}!\n")
+                    return
+                
+                except ValueError as erro:
+                    limpa()
+                    print(f"Erro: {erro}\n")
+
+            elif opcao == 2:
+                limpa()
+                return
+
         except ValueError as erro:
             limpa()
             print(f"Erro: {erro}\n")
@@ -70,7 +107,7 @@ def menu_criarConta(sistema):
                 
             elif opcao == 3:
                 limpa()
-                return  # Retorna ao menu principal
+                return
 
         except ValueError as erro:
             limpa()
@@ -98,7 +135,7 @@ def menu_criarCliente(sistema):
                 limpa()
                 
                 nome = input("Digite o nome: ")
-                cpf = input("Digite o CPF: ")
+                cpf = int(input("Digite o CPF: "))
                 idade = int(input("Digite a idade: "))
                 senha = input("Digite a senha: ")
                 
@@ -107,15 +144,16 @@ def menu_criarCliente(sistema):
                 limpa()
 
                 print("Conta de usuário criada com sucesso!\n")
-                return  # Retorna ao menu anterior
+                return
                 
             elif opcao == 2:
                 limpa()
-                return  # Retorna ao menu anterior
+                return
 
         except ValueError as erro:
             limpa()
             print(f"Erro: {erro}\n")
+
 
 # Chama a função do menu principal / inicia o menu
 menu_principal()
