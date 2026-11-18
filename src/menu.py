@@ -104,6 +104,7 @@ def menu_criarConta(sistema):
                 menu_criarCliente(sistema)
             elif opcao == 2:
                 limpa()
+                menu_criarOrganizador(sistema)
                 
             elif opcao == 3:
                 limpa()
@@ -153,6 +154,47 @@ def menu_criarCliente(sistema):
         except ValueError as erro:
             limpa()
             print(f"Erro: {erro}\n")
+
+def menu_criarOrganizador(sistema):
+    limpa()
+
+    while True:
+        print("=======================")
+        print("Criar Conta de Organizador")
+        print("-----------------------")
+        print("1. Criar conta")
+        print("2. Voltar ao menu anterior")
+        print("=======================")
+
+        try:
+            opcao = int(input("Digite uma opção: "))
+
+            if opcao not in [1, 2]:
+                raise ValueError("Número de opção inválido!")
+
+            if opcao == 1:
+                limpa()
+                
+                nome = input("Digite o nome: ")
+                cpf = int(input("Digite o CPF: "))
+                idade = int(input("Digite a idade: "))
+                senha = input("Digite a senha: ")
+                
+                sistema.criarOrganizador(nome, cpf, idade, senha)
+
+                limpa()
+
+                menu_login(sistema)
+                return
+                
+            elif opcao == 2:
+                limpa()
+                return
+
+        except ValueError as erro:
+            limpa()
+            print(f"Erro: {erro}\n")
+
 
 
 # Chama a função do menu principal / inicia o menu
