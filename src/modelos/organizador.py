@@ -35,6 +35,11 @@ class Organizador(Pessoa):
         if vagas is not None:
             evento.vagas = vagas
 
+    def RemoverEvento(self, evento: Evento) -> None:
+        if evento not in self.eventos:
+            raise ValueError("Este evento não te pertence")
+        self.eventos.remove(evento)
+
     # função utilizada para listar os organizadores + eventos que a eles pertecem
     def __str__ (self) -> str:
         base = super().__str__()

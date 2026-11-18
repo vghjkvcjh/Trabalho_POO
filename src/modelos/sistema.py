@@ -48,6 +48,13 @@ class Sistema:
         
         return self._contas[cpf]
 
+    def ListarEventos(self) -> list[Evento]:
+        eventos = []
+        for organizador in self._contas.values():
+            if isinstance(organizador, Organizador):
+                eventos.extend(organizador.eventos)
+        return eventos
+
     def ListarOrganizadores(self) -> None:
         organizadores = [o for o in self._contas.values() if isinstance(o, Organizador)] # percorre todas as contas selecionando apenas aqueles com tipo Organizador
 

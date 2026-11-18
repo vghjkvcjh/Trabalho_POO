@@ -16,5 +16,5 @@ class Evento:
 
     # função utilizada para listar os eventos
     def __str__ (self) -> str:
-        return f"Evento({self.nome} | {self.local} | {self.idade_minima} |{self.data:%d/%m/%Y %H:%M} | R${self.valor:.2f} | {self.vagas})"
+        return f"Evento: {self.nome} | Local: {self.local} | Idade mínima: {self.idade_minima} | Data: {self.data:%d/%m/%Y   %H:%M} | R${self.valor:.2f} | Quantidade de vagas: {self.vagas}"
 
