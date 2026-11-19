@@ -147,7 +147,7 @@ def menu_criarCliente(sistema):
                 limpa()
 
                 nome = input("Digite o nome: ")
-                cpf = int(input("Digite o CPF: "))
+                cpf = (input("Digite o CPF: "))
                 idade = int(input("Digite a idade: "))
                 senha = input("Digite a senha: ")
 
@@ -188,7 +188,7 @@ def menu_criarOrganizador(sistema):
                 limpa()
 
                 nome = input("Digite o nome: ")
-                cpf = int(input("Digite o CPF: "))
+                cpf = input("Digite o CPF: ")
                 idade = int(input("Digite a idade: "))
                 senha = input("Digite a senha: ")
 
