@@ -4,10 +4,22 @@ from datetime import datetime
 from modelos.sistema import Sistema
 from modelos.cliente import Cliente
 from modelos.organizador import Organizador
+from modelos.evento import Show, Palestra, Esportivo
+from interfaces import Exportavel
 
 
 def limpa(): # Função para limpar o terminal
     os.system('cls' if os.name == 'nt' else 'clear')
+
+def listar_exp(itens: list[Exportavel]) -> None:
+    # Lista quaisquer objetos exportaveis
+    if not itens:
+        print("Nada para listar.")
+        return
+
+    for item in itens:
+        print(item.exportar())
+        print("-----------------------------------")
 
 
 def menu_principal(): # Função do menu principal
@@ -64,7 +76,7 @@ def menu_login(sistema):
 
             if opcao == 1:
                 limpa()
-                cpf = int(input("Digite o CPF: "))
+                cpf = (input("Digite o CPF: "))
                 senha = input("Digite a senha: ")
 
                 try:
@@ -214,7 +226,7 @@ def listar_eventos(eventos):
         return
 
     for evento in eventos:
-        print(f"ID: {evento.id_ev} | {evento}")
+        print(f"ID: {evento.id_ev} | {evento.exportar()}")
         print("-----------------------------------")
 
 
@@ -395,7 +407,18 @@ def criar_evento(organizador):
 
     print("========== CRIAR EVENTO ==========")
 
+    tipos = {1: Show, 2: Palestra, 3: Esportivo}
+
     try:
+        print("Tipo de evento:")
+        print("1. Show")
+        print("2. Palestra")
+        print("3. Esportivo")
+        opcao = int(input("Escolha o tipo: "))
+
+        if opcao not in tipos:
+            raise ValueError("Tipo de evento inválido!")
+
         nome = input("Nome do evento: ")
         data = datetime.strptime(
             input("Data e hora (DD/MM/AAAA HH:MM): "),
@@ -403,15 +426,13 @@ def criar_evento(organizador):
         )
         local = input("Local: ")
         idade_minima = int(input("Idade mínima: "))
-        valor = float(input("Valor do ingresso: "))
-        vagas = int(input("Quantidade de vagas: "))
+        valor = float(input("Valor base do ingresso: "))
+        capacidade = int(input("Capacidade (quantidade de vagas): "))
 
-        organizador.CriarEvento(
-            nome, data, local, idade_minima, valor, vagas
-        )
+        organizador.CriarEvento(tipos[opcao], nome, data, local, idade_minima, valor, capacidade)
         print("Evento criado com sucesso!")
 
-    except ValueError as erro:
+    except (ValueError, TypeError) as erro:
         print(f"Não foi possível criar o evento: {erro}")
 
     input("\nPressione ENTER para continuar...")
@@ -439,7 +460,7 @@ def editar_evento(organizador, evento=None):
         )
         local = input(f"Local [{evento.local}]: ")
         idade_texto = input(f"Idade mínima [{evento.idade_minima}]: ")
-        valor_texto = input(f"Valor [{evento.valor}]: ")
+        valor_texto = input(f"Valor [{evento.valor_base}]: ")
         vagas_texto = input(f"Vagas [{evento.vagas}]: ")
 
         organizador.EditarEvento(
