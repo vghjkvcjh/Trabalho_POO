@@ -111,7 +111,6 @@ trabalho-poo/
 - **Linguagem:** Python 3.10 ou superior.
 - **Paradigma:** Programação Orientada a Objetos.
 - **Interface:** Terminal interativo.
-- **Bibliotecas:** Apenas bibliotecas nativas da linguagem Python.
 - **Tipagem:** Type Hints para melhorar a clareza e a organização do código.
 - **Documentação:** Docstrings para descrever classes e métodos públicos.
 - **Nomenclatura:** Classes utilizando o padrão `PascalCase`.
