@@ -9,8 +9,5 @@ class Ingresso:
         self.evento = evento
         self.valor = evento.valor
 
-    def __str__(self): # formatação para texto simples
-        return f"Ingresso #{self.id} | {self.evento.nome} ({self.cliente.nome})"
-
-    def __repr__(self): # formatação para lista
-        return self.__str__()
+    def exportar(self) -> str:
+        return f"Ingresso #{self.id} | {self.evento.nome} | {self.cliente.nome} | R${self.valor:.2f}"
