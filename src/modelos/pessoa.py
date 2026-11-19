@@ -12,7 +12,7 @@ class Pessoa(ABC):
         self.nome = nome
         self.cpf = cpf
         self.idade = idade
-        self.senhaH = None
+        self._senhaH: str | None = None
 
     # Propriedade responsável pela validação do CPF
     @property
@@ -66,4 +66,4 @@ class Pessoa(ABC):
 
 
     def __str__(self) -> str:
-        return (f"ID: {self.id} | Nome: {self.nome} | CPF: {self.cpf} | Idade: {self.idade} | Cargo: {self.cargo}")
+        return (f"ID: {self.id} | Nome: {self.nome} | CPF: {self.cpf} | Idade: {self.idade}")
