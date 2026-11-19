@@ -1,11 +1,13 @@
+from __future__ import annotations
+
 import itertools
 from abc import ABC, abstractmethod
 from datetime import datetime
 from typing import TYPE_CHECKING
-
-from modelos import Ingresso
-from modelos import Cliente
-from modelos import Organizador
+from .ingresso import Ingresso
+if TYPE_CHECKING:  # Este bloco só serve para os type hints
+    from .cliente import Cliente
+    from .organizador import Organizador
 
 
 class Evento(ABC): # Definido como classe abstrata
@@ -105,7 +107,6 @@ class Evento(ABC): # Definido como classe abstrata
 
     # Representação em texto
     def exportar(self) -> str:
-        """Resumo em uma linha (usado pelo Protocol Exportavel, R10)."""
         return f"[{self.tipo}] {self.nome} | {self.ocupacao:.0f}% ocupado | R${self.faturamento:.2f}"
 
     def __str__(self) -> str:
