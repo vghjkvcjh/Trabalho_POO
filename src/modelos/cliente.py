@@ -10,5 +10,5 @@ class Cliente(Pessoa):
     # Função para se inscrever em eventos
     def inscrever(self, evento) -> Ingresso:
         ingresso = evento.vender_ingresso(self)   # Regras ficam no Evento
-        self._ingressos.append(ingresso)
+        self.ingressosP.append(ingresso)
         return ingresso
