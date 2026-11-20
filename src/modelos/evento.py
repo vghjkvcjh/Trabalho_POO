@@ -130,6 +130,10 @@ class Evento(ABC):
     def pode_acessar(self, cliente: Cliente) -> bool:
         ...
 
+    @abstractmethod
+    def exportar(self) -> str:
+    ...
+
     def vender_ingresso(self, cliente: Cliente) -> Ingresso:
         if not self.pode_acessar(cliente):
             raise ValueError("Cliente não atende às regras de acesso do evento.")
@@ -200,6 +204,12 @@ class Palestra(Evento):
     def pode_acessar(self, cliente: Cliente) -> bool:
         return True
 
+    def exportar(self) -> str:
+    return (
+        f"[{self.tipo}] {self.nome} | Valor base: R${self.valor_base:.2f} | "
+        f"{self.ocupacao:.0f}% ocupado | Faturamento: R${self.faturamento:.2f}"
+    )
+
 
 class Esportivo(Evento):
     # Evento esportivo oferece meia-entrada a menores de 12 e maiores de 59.
@@ -214,3 +224,9 @@ class Esportivo(Evento):
 
     def pode_acessar(self, cliente: Cliente) -> bool:
         return cliente.idade >= self.idade_minima
+
+    def exportar(self) -> str:
+    return (
+        f"[{self.tipo}] {self.nome} | Valor base: R${self.valor_base:.2f} | "
+        f"{self.ocupacao:.0f}% ocupado | Faturamento: R${self.faturamento:.2f}"
+    )
