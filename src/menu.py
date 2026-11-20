@@ -5,21 +5,10 @@ from modelos.sistema import Sistema
 from modelos.cliente import Cliente
 from modelos.organizador import Organizador
 from modelos.evento import Show, Palestra, Esportivo
-from interfaces import Exportavel
 
 
 def limpa(): # Função para limpar o terminal
     os.system('cls' if os.name == 'nt' else 'clear')
-
-def listar_exp(itens: list[Exportavel]) -> None:
-    # Lista quaisquer objetos exportaveis
-    if not itens:
-        print("Nada para listar.")
-        return
-
-    for item in itens:
-        print(item.exportar())
-        print("-----------------------------------")
 
 
 def menu_principal(): # Função do menu principal
@@ -284,6 +273,7 @@ def menu_cliente(sistema, cliente):
                 input("\nPressione ENTER para continuar...")
 
             elif opcao == 3:
+                limpa()
                 return
 
         except ValueError as erro:
@@ -300,7 +290,7 @@ def tela_eventos_cliente(sistema, cliente):
         eventos = sistema.ListarEventos()
         listar_eventos(eventos)
         print("Digite o ID de um evento para participar.")
-        print("0. Voltar")
+        print("0. Voltar\n")
 
         try:
             id_evento = int(input("ID do evento: "))
@@ -355,6 +345,7 @@ def menu_organizador(organizador):
                 criar_evento(organizador)
 
             elif opcao == 3:
+                limpa()
                 return
 
         except ValueError as erro:
@@ -417,7 +408,7 @@ def criar_evento(organizador):
         opcao = int(input("Escolha o tipo: "))
 
         if opcao not in tipos:
-            raise ValueError("Tipo de evento inválido!")
+            raise ValueError("\nTipo de evento inválido!")
 
         nome = input("Nome do evento: ")
         data = datetime.strptime(
@@ -451,7 +442,7 @@ def editar_evento(organizador, evento=None):
     limpa()
     
     print(f"========== EDITAR: {evento.nome} ==========")
-    print("Deixe em branco os campos que não deseja alterar.")
+    print("Deixe em branco os campos que não deseja alterar.\n")
 
     try:
         nome = input(f"Nome [{evento.nome}]: ")
