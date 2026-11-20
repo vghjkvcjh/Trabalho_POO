@@ -132,7 +132,7 @@ class Evento(ABC):
 
     @abstractmethod
     def exportar(self) -> str:
-    ...
+        ...
 
     def vender_ingresso(self, cliente: Cliente) -> Ingresso:
         if not self.pode_acessar(cliente):
@@ -205,10 +205,10 @@ class Palestra(Evento):
         return True
 
     def exportar(self) -> str:
-    return (
-        f"[{self.tipo}] {self.nome} | Valor base: R${self.valor_base:.2f} | "
-        f"{self.ocupacao:.0f}% ocupado | Faturamento: R${self.faturamento:.2f}"
-    )
+        return (
+            f"[{self.tipo}] {self.nome} | Valor base: R${self.valor_base:.2f} | "
+            f"{self.ocupacao:.0f}% ocupado | Faturamento: R${self.faturamento:.2f}"
+        )
 
 
 class Esportivo(Evento):
@@ -226,7 +226,7 @@ class Esportivo(Evento):
         return cliente.idade >= self.idade_minima
 
     def exportar(self) -> str:
-    return (
-        f"[{self.tipo}] {self.nome} | Valor base: R${self.valor_base:.2f} | "
-        f"{self.ocupacao:.0f}% ocupado | Faturamento: R${self.faturamento:.2f}"
-    )
+        return (
+            f"[{self.tipo}] {self.nome} | Valor base: R${self.valor_base:.2f} | "
+            f"{self.ocupacao:.0f}% ocupado | Faturamento: R${self.faturamento:.2f}"
+        )
