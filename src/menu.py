@@ -1,7 +1,6 @@
 import os
 from datetime import datetime
 
-from modelos.sistema import Sistema
 from modelos.cliente import Cliente
 from modelos.organizador import Organizador
 from modelos.evento import Show, Palestra, Esportivo
@@ -11,9 +10,8 @@ def limpa(): # Função para limpar o terminal
     os.system('cls' if os.name == 'nt' else 'clear')
 
 
-def menu_principal(): # Função do menu principal
+def menu_principal(sistema): # Função do menu principal
     limpa()
-    sistema = Sistema()
 
     while True: # Loop principal do menu
         print("=======================")
@@ -268,7 +266,7 @@ def menu_cliente(sistema, cliente):
                     print("Você ainda não possui ingressos.")
                 else:
                     for ingresso in cliente.ingressosP:
-                        print(ingresso)
+                        print(ingresso.exportar())
 
                 input("\nPressione ENTER para continuar...")
 
@@ -452,7 +450,7 @@ def editar_evento(organizador, evento=None):
         local = input(f"Local [{evento.local}]: ")
         idade_texto = input(f"Idade mínima [{evento.idade_minima}]: ")
         valor_texto = input(f"Valor [{evento.valor_base}]: ")
-        vagas_texto = input(f"Vagas [{evento.vagas}]: ")
+        capacidade_texto = input(f"Capacidade [{evento.capacidade}]: ")
 
         organizador.EditarEvento(
             evento,
@@ -462,7 +460,7 @@ def editar_evento(organizador, evento=None):
             local=local if local else None,
             idade_minima=int(idade_texto) if idade_texto else None,
             valor=float(valor_texto) if valor_texto else None,
-            vagas=int(vagas_texto) if vagas_texto else None
+            capacidade=int(capacidade_texto) if capacidade_texto else None
         )
 
         print("Evento atualizado com sucesso!")
@@ -498,7 +496,3 @@ def excluir_evento(organizador, evento=None):
         print("Exclusão cancelada.")
 
     input("\nPressione ENTER para voltar aos meus eventos...")
-
-
-# Chama a função do menu principal / inicia o menu
-menu_principal()
