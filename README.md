@@ -35,6 +35,10 @@ O projeto tem como tema o gerenciamento de eventos e ingressos, contemplando dif
 
 A estrutura utiliza hierarquias de classes para especializar comportamentos e responsabilidades, permitindo que diferentes tipos de eventos e usuários possuam características próprias.
 
+## 4. Conceitos de Programação Orientada a Objetos aplicados
+
+O projeto contempla os seguintes requisitos de POO:
+
 ## Onde cada requisito é cumprido
 
 ### R1 - Classes e objetos
