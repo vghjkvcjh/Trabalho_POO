@@ -35,22 +35,56 @@ O projeto tem como tema o gerenciamento de eventos e ingressos, contemplando dif
 
 A estrutura utiliza hierarquias de classes para especializar comportamentos e responsabilidades, permitindo que diferentes tipos de eventos e usuários possuam características próprias.
 
-## 4. Conceitos de Programação Orientada a Objetos aplicados
+## Onde cada requisito é cumprido
 
-O projeto contempla os seguintes requisitos de POO:
+### R1 - Classes e objetos
+- Classes em `src/modelos/`: `Pessoa` (`pessoa.py:6`), `Cliente` (`cliente.py:5`), `Organizador` (`organizador.py:5`), `Ingresso` (`ingresso.py:3`), `Evento` (`evento.py:16`) e `Sistema` (`sistema.py:9`).
+- Instâncias criadas em `dados_exemplo.py:17-54`.
 
-| Requisito | Conceito | Aplicação |
-|---|---|---|
-| R1 | Classes e objetos | Representação das entidades do sistema por meio de classes e instâncias. |
-| R2 | Composição | Relacionamento entre eventos, ingressos, organizadores e participantes. |
-| R3 | Encapsulamento | Utilização de atributos protegidos e propriedades para controlar o acesso aos dados. |
-| R4 | Métodos de classe e estáticos | Utilização de `@classmethod` e `@staticmethod` para operações específicas. |
-| R5 | Properties | Utilização de `@property` e setters para consultar, modificar e validar atributos. |
-| R6 | Atributos de classe | Utilização de constantes e atributos compartilhados entre instâncias. |
-| R7 | Herança e `super()` | Especialização de classes por meio de uma classe base e suas subclasses. |
-| R8 | Sobrescrita e polimorfismo | Implementação de métodos com comportamentos diferentes nas classes derivadas. |
-| R9 | Classes abstratas | Utilização de `ABC` e `@abstractmethod` para estabelecer contratos entre classes. |
-| R10 | Interface / Protocol | Utilização de `Protocol` para definir comportamentos que podem ser implementados por classes independentes. |
+### R2 - Composição
+- `Organizador` possui uma lista de eventos (`organizador.py:9`).
+- `Evento` possui seus ingressos (`evento.py:23`) e referencia o organizador (`evento.py:29`).
+- `Cliente` guarda seus ingressos (`cliente.py:8`).
+- `Ingresso` referencia cliente e evento (`ingresso.py:8-9`).
+- `Sistema` agrega as contas (`sistema.py:11`).
+
+### R3 - Encapsulamento
+- Atributos protegidos `_cpf`, `_nome` e `_senhaH` (`pessoa.py:15, 33, 65`).
+- Em `Evento`: `_nome`, `_data`, `_local`, `_valor_base`, `_capacidade` e `_ingressos` (`evento.py:23, 52-102`), com `_ingressos` exposto apenas como tupla somente leitura (`evento.py:116-118`).
+- Em `Sistema`: `_contas`, `_eventos` e `_gerarHash` (`sistema.py:11-14`).
+
+### R4 - Métodos de classe e estáticos
+- `@classmethod total_de_eventos` (`evento.py:155-157`).
+- `@staticmethod _validar_texto` e `_validar_idade` (`evento.py:34-44`).
+- `@staticmethod _gerarHash` (`sistema.py:14-18`).
+
+### R5 - Properties
+- Em `Pessoa`: `cpf`, `senhaH` e `nome`, com validação nos setters (`pessoa.py:18-65`).
+- Em `Evento`: `nome`, `data`, `local`, `idade_minima`, `valor_base` e `capacidade`, com setters validados (`evento.py:46-102`), e propriedades somente leitura `vagas_disponiveis`, `ocupacao`, `faturamento` e `ingressos` (`evento.py:104-118`).
+- Em `Show`: `preco_com_taxa` (`evento.py:176-178`).
+
+### R6 - Atributos de classe
+- Contadores de id compartilhados: `Pessoa.id_user` (`pessoa.py:7`), `Ingresso.id_ing` (`ingresso.py:4`) e `Evento._contador_id` (`evento.py:19`).
+- Contador `Evento.total_criados` (`evento.py:20, 32`).
+- Constante `Show.TAXA_SERVICO` (`evento.py:170`).
+
+### R7 - Herança e `super()`
+- `Cliente(Pessoa)` (`cliente.py:5`, `super().__init__` na linha 7).
+- `Organizador(Pessoa)` (`organizador.py:5`, `super().__init__` na linha 8 e `super().__str__()` na linha 45).
+- `Show`, `Palestra` e `Esportivo` herdam de `Evento` (`evento.py:167, 194, 214`).
+
+### R8 - Sobrescrita e polimorfismo
+- `tipo`, `calcular_preco`, `pode_acessar` e `exportar` são sobrescritos em `Show` (`evento.py:172-191`), `Palestra` (`evento.py:197-211`) e `Esportivo` (`evento.py:217-232`), cada um com regras próprias de preço e acesso.
+- `Organizador.__str__` sobrescreve o de `Pessoa` (`organizador.py:44`).
+- Polimorfismo em uso: `vender_ingresso` chama `self.calcular_preco` e `self.pode_acessar` sem saber o tipo do evento (`evento.py:138, 144`), e o menu chama `evento.exportar()` para qualquer tipo (`menu.py:216`).
+
+### R9 - Classes abstratas
+- `Pessoa(ABC)` com `__init__` abstrato (`pessoa.py:6, 9-10`).
+- `Evento(ABC)` com `tipo`, `calcular_preco`, `pode_acessar` e `exportar` abstratos (`evento.py:16, 120-135`).
+
+### R10 - Interface / Protocol
+- Não há `Intergace`, porém os protocolos estam inseridos em `cpf` e `senha`
+
 
 ## 5. Funcionalidades do sistema
 
