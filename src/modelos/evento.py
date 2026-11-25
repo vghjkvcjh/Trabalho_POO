@@ -180,6 +180,13 @@ class Show(Evento):
     def calcular_preco(self, cliente: Cliente) -> float:
         return self.preco_com_taxa
 
+    def exportarCli(self) -> str:
+        return (
+            f"[{self.tipo}] {self.nome} | Valor base: R${self.valor_base:.2f} | "
+            f"Preço com taxa: R${self.preco_com_taxa:.2f} | "
+            f"{self.ocupacao:.0f}% ocupado"
+        )
+
     def exportar(self) -> str:
         return (
             f"[{self.tipo}] {self.nome} | Valor base: R${self.valor_base:.2f} | "
@@ -204,9 +211,16 @@ class Palestra(Evento):
     def pode_acessar(self, cliente: Cliente) -> bool:
         return True
 
+    def exportarCli(self) -> str:
+        return (
+            f"[{self.tipo}] {self.nome} | Valor base: R${self.valor_base:.2f} | "
+            f"{self.ocupacao:.0f}% ocupado"
+        )
+    
     def exportar(self) -> str:
         return (
             f"[{self.tipo}] {self.nome} | Valor base: R${self.valor_base:.2f} | "
+            f"Preço com taxa: R${self.preco_com_taxa:.2f} | "
             f"{self.ocupacao:.0f}% ocupado | Faturamento: R${self.faturamento:.2f}"
         )
 
@@ -225,8 +239,15 @@ class Esportivo(Evento):
     def pode_acessar(self, cliente: Cliente) -> bool:
         return cliente.idade >= self.idade_minima
 
+    def exportarCli(self) -> str:
+        return (
+            f"[{self.tipo}] {self.nome} | Valor base: R${self.valor_base:.2f} | "
+            f"{self.ocupacao:.0f}% ocupado"
+        )
+
     def exportar(self) -> str:
         return (
             f"[{self.tipo}] {self.nome} | Valor base: R${self.valor_base:.2f} | "
+            f"Preço com taxa: R${self.preco_com_taxa:.2f} | "
             f"{self.ocupacao:.0f}% ocupado | Faturamento: R${self.faturamento:.2f}"
         )

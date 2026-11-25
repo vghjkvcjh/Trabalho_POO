@@ -213,7 +213,16 @@ def listar_eventos(eventos):
         return
 
     for evento in eventos:
-        print(f"ID: {evento.id_ev} | {evento.exportar()}")
+        print(f"ID: {evento.id_ev} | {evento.exportarCli()}")
+        print("-----------------------------------")
+
+def listar_eventos(eventos):
+    if not eventos:
+        print("Nenhum evento cadastrado.")
+        return
+
+    for evento in eventos:
+        print(f"ID: {evento.id_ev} | {evento.exportarCli()}")
         print("-----------------------------------")
 
 
